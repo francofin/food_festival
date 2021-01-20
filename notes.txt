@@ -9,3 +9,45 @@ Google Lighthouse is a tool that helps improve the performance of web applicatio
 •	The SW-precache-webpack (Links to an external site.) plugin allows you to use service workers to cache your external project dependencies. It will generate a service worker file, using sw-precache, and add it to your build directory.
 •	The webpack-PWA-manifest (Links to an external site.) plugin generates a manifest.json for your PWA, with auto icon resizing and fingerprinting support.
  
+To use the Network tab to test performance at 3G, follow these steps:
+
+In your browser, navigate to the project's github.io link.
+
+Open the Chrome DevTools and click the Network Tab.
+
+Click the Online selection and choose Slow 3G, as shown in the following image:
+This is called throttling a connection, which is the act of using software to deliberately
+ slow down, or "throttle," a connection's speed to be slower than it is normally.
+
+ By throttling our connection, we can see how our users with worse connections might experience our content. 
+ This will help us identify what is slowing loading times most.
+ Lighthouse is a high-quality auditing tool for analyzing webpages. 
+ It provides audits for performance, accessibility, SEO (Search Engine Optimization), and Progressive Web Applications.
+ One of the main metrics Lighthouse looks for is the First Meaningful Paint.
+ A paint occurs when content is loaded on the screen.
+ Lighthouse measures the first contentful paint, which means when any content is loaded.
+  It also measures the first meaningful paint, which occurs when the primary content becomes visible.
+  One of the most important metrics it takes is Time to Interactive
+  This is the time it takes for the webpage being audited to become usable.
+  Page abandonment occurs when a user leaves a webpage without completing the task they set out to do.
+  One of the steps we can take to reduce this load time is to make our JavaScript file size smaller. This can be achieved through minification.
+  Minification is the process of taking our code and removing all unnecessary characters and whitespace without any loss of functionality in an attempt to save file space
+   Because we want the dimensions to remain the same, we'll reduce the file size by compressing the images.
+   We can use a process called image compression. For the purposes of this course, we'll focus on "lossy" image compression.
+   Lossy image compression refers to the fact that some of the image data is lost during compression. 
+   Compression will take the data that makes up the image and decrease the image's overall size, with minimal loss to the image's integrity.
+Once an image has used lossy compression, you cannot reverse the process due to this loss of data.
+For our application, we'll compress our images from a PNG format, which is lossless, to JPG, which is lossy.
+
+Just like with JavaScript, there is a free, online tool we can use to minify our images. Follow these steps to use the online image compressor:
+Navigate to Optimizilla (Links to an external site.).
+
+Select the JPG files inside the assets/img directory to upload for optimization.
+
+Once the images have finished compressing, select DOWNLOAD ALL.
+
+Lazy loading
+We can change this by applying a concept called lazy loading, which allows us to only download assets as they are needed.
+Another useful technique that can speed up the initial render of the webpage is to lazy load the JavaScript files. 
+Eliminate rendering-blocking resources."
+This can be done simply by adding the defer attribute to the <script>, as shown in the following HTML in the index.html page:
