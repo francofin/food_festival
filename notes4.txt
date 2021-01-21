@@ -5,3 +5,87 @@ The client wants us to do everything we can to prevent network connectivity prob
  We'll accomplish this goal using service workers. Service workers are background scripts that run in the browser, 
  separate from the JavaScript. Service workers can do many things, 
  but most useful to us is their ability to intercept network requests and serve data from the browser cache. 
+ A service worker allows us to control how network requests from the client are
+  handled.
+ We could also potentially use the service worker to communicate when a user's connection is offline.
+ Service workers use the browser's Cache API to store assets.
+ the Cache API can store all of the front-end assets, like images, JavaScript, HTML, CSS, and API responses.
+ A service worker can also intercept requests that the browser makes before the request reaches a server. 
+ The service worker can then send back the cached files instead of the files requested from the server.
+ t circumvents a "fail to connect" or timeout response.
+ Certain functionality can only be implemented from within a service worker, like caching assets 
+ to make the application useable without an internet connection or notifying the browser that the application should be installable.
+
+ Service workers also use a separate thread. Recall from Node.js 
+ that a thread is an independent set of values for the processor that controls the order in which tasks are executed.
+
+ Service workers have a lifecycle consisting of the following three main parts:
+
+Installation: The service worker creates a version-specific cache.
+
+Activation: This event fires after the service worker has been installed and any previously installed service worker has been removed.
+
+Waiting/Idle: The updated service worker waits until the existing service worker is no longer controlling clients. 
+This step is often skipped with a function, because previous service workers rarely exist past a new service worker's installation.
+
+In this section we'll register the service worker. Basically, 
+this step tells the browser that we're using a service worker and explains where to find the relevant code. 
+We'll do this by adding a function to the index.html page.
+
+What is the navigator object? Try console-logging navigator in the browser.
+ You'll see that the object contains information about which browser a visitor is using. 
+ Among this data is a property that determines whether or not the browser has support for a service worker.
+
+Note that we don't need to add a <script src="./service-worker.js"> tag, 
+because navigator.serviceWorker.register("./service-worker.js") does that for us.
+
+
+Now that the browser knows about the service worker, 
+we need to install it, adding files to the precache, so that the application can use the cache.
+We'll do this by setting up event listeners. Add the following code to the service-worker.js file:
+self.addEventListener('install', function (e) {
+
+})
+Well, service workers run before the window object has even been created
+So instead we use the self keyword to instantiate listeners on the service worker.
+ The context of self here refers to the service worker object.
+
+
+Before we add code to the callback function, 
+we need to define which files we'd like to cache to the top of the service-worker.js file.
+We use e.waitUntil to tell the browser to wait until the work is complete before terminating the service worker.
+
+This ensures that the service worker doesn't move on from the installing phase until it's finished executing all of its code.
+
+We use caches.open to find the specific cache by name, then add every file in the FILES_TO_CACHE array to the cache.
+Perfect! Now that we've installed the service worker, we'll need to add an event listener for the next part of the service worker's lifecycle: activation.
+
+Before proceeding, note that every time a user navigates to the site, the browser tries to redownload the service-worker.js file in the background.
+If the service-worker.js differs in any way from the one that the browser currently has, it considers the service worker to be new.
+Because the old service worker will still be controlling at least one client, the new service worker will enter a waiting state.
+we can manually reset the cache and service worker through Chrome DevTools.
+Every time you make changes to the service worker, navigate to the Application tab in Chrome DevTools, 
+select Clear Storage, and then click on "Clear site data".
+
+
+Either way, as soon as a new service worker takes control of a page, the activate event will fire.
+In the activation step, we clear out any old data from the cache and, in the same step, tell the service worker how to manage caches.
+.keys() returns an array of all cache names, which we're calling keyList.
+keyList is a parameter that contains all cache names under <username>.github.io.
+e'll capture the ones that have that prefix, stored in APP_PREFIX, and save them to an array called cacheKeeplist using the .filter() method.
+
+
+Here, we listen for the fetch event, log the URL of the requested resource, 
+and then begin to define how we will respond to the request.
+
+Notice that we're using a method on the event object called respondWith to intercept the fetch request.
+If it is stored in the cache, e.respondWith will deliver the resource directly from the cache; 
+otherwise the resource will be retrieved normally.
+
+
+First, we use .match() to determine if the resource already exists in caches
+Next, if the resource is not in caches, we allow the resource to be retrieved from the online network as usual, using the following code:
+// You can omit if/else for console.log & put one line below like this too.
+// return request || fetch(e.request)
+})
+e.request.url, his includes all resources that would show up in the Network tab in Chrome DevTools
