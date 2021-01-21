@@ -1,0 +1,69 @@
+It is important to mention that webpack's main objective is to reduce the processing 
+time needed by the browser to render the webpage. 
+This will improve the overall Time to Interactive (TTI) as well as the First Meaningful Paint (FMP).
+By splitting the code into modules, webpack can bundle them into bite-sized chunks that can be loaded on demand. 
+In other words, it takes a long time to not only translate the code from what 
+people can read into something the browser can understand (i.e., machine code), 
+but also to execute the code itself.'
+let's install a plugin that will analyze our bundle sizes to see how much JavaScript is being processed by the browser.
+The name of this plugin is called the webpack-bundle-analyzer.
+Notice that when we added the BundleAnalyzerPlugin, we configured the analyzerMode property with a static value. 
+This will output an HTML file called report.html that will generate in the dist folder.
+We can also set this value to disable to temporarily stop the reporting and automatic opening of this report in the browser.
+
+There are several ways to code split, which depend on which part of your project you would like to bundle:
+
+Entry point splitting separates code by entry points in your app. 
+An entry point is defined by each page's requisite script files to load.
+
+Vendor splitting separates vendor code (e.g., jQuery, Bootstrap, lodash, etc.) away from your app's code. 
+A vendor bundle can also be shared between other bundles, further reducing overall bundle size by creating a common chunk.
+
+Dynamic splitting separates code and allows dynamic importing of modules. 
+This type of splitting is often best for single-page applications that use front-end routing.
+webpack tracks the dependencies of the JavaScript modules with a dependency graph. 
+These bundles ensure that we don't have to worry any longer about the sequence of <script> 
+ loading our JavaScript assets in the HTML files. 
+But without the <script> tags, how does webpack know which files are needed and where?
+
+Modularization
+ere are the reasons why encapsulation improves performance:
+
+Encapsulating the code into modules creates separate private silos of code.
+ This can protect the variables within the module by creating a local private scope that cannot be affected by outside changes.
+
+Modules can be reused, keeping the codebase DRY.
+
+Fixing bugs, adding features, and code maintenance are much easier in a module system due to the organization of the codebase.
+When creating multiple entry points, it is especially advantageous to split code based on its responsibility for different page loads.
+Separating the JavaScript assets based on the webpages is a great strategy and will allow lazy loading, 
+because only one page can load at a time.
+The two factors determining how quickly the request is transmitted are network speed and payload size.
+Loaders can be downloaded from npm and added to the webpack.config.js file
+Loaders can pre-process and optimize the assets during the build process.
+Loaders pre-process the assets on a file by file basis before and during the build.
+Plugins are scoped more on the bundle level and deliver changes at the end of the build.
+While loaders are configured in the module property of the webpack configuration object, plugins are configured in the plugins array.
+Loaders are used mostly for non JavaScript files such as image, CSS, and HTML files.
+
+Download our file-loader by installing the npm package that will emit our images to our output path.
+
+Configure our webpack config object to use the file-loader.
+
+Import our image files into the JavaScript file.
+
+Optimize image files with image-webpack-loader.
+
+In order to optimize the images, we will need to emit our images to our output path, 
+Remember that our output path is the dist folder where our bundles reside
+ webpack must first create the build version of these images in the dist folder; then we will be able to optimize them.
+
+ Within the same object as test, we will add another property called use where the actual loader is implemented. 
+
+ We will be targeting the carousel images to optimize, so let's adjust the script.js file so we can import the images.
+ Thankfully, our loader has configurable options that we can designate in the webpack.config.js.
+  we can see there is an options object that can rename our files and change the output path.
+  As you can see, we added an options object below the loader assignment that contains a name function, 
+  which returns the name of the file with the file extension.
+Below that is the publicPath property, 
+which is also a function that changes our assignment URL by replacing the ../ from our require() statement with /assets/.

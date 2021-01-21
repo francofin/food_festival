@@ -29,3 +29,5 @@ By default, webpack wants to run in production mode.
 The carousel, modals, and anything else that uses Bootstrap will require that code to be included. 
 Right now, the only script we've included in our project is the dist/main.bundle.js. 
 o let's install Bootstrap to restore functionality to the page. 
+so we need to install that using npm in order to continue. Go ahead and install popper.js 
+npm i popper.js
