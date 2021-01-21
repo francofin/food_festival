@@ -1,0 +1,7 @@
+The client wants us to do everything we can to prevent network connectivity problems from interfering with the user experience.
+ We can't exactly guarantee internet service for everyone—but we can 
+ enable users to access and use the app even without an internet connection.
+
+ We'll accomplish this goal using service workers. Service workers are background scripts that run in the browser, 
+ separate from the JavaScript. Service workers can do many things, 
+ but most useful to us is their ability to intercept network requests and serve data from the browser cache. 
