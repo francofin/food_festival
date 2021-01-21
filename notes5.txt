@@ -1,0 +1,5 @@
+Service workers allow us to cache data,
+including HTML, CSS and JavaScript, so that the user won't have to re-download it when navigating back to the page.
+
+This caching gives our application offline functionality.
+Progressive Web Application. This will allow the app to be installed on a mobile device or desktop computer for quick, offline access. 
