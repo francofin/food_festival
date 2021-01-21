@@ -1,0 +1,31 @@
+Bundling our code involves creating a dependency graph so that any additional 
+files needed by our JavaScript file can all be bundled up together into a single JavaScript file.
+A dependency graph is a module builder's way of keeping track of all of the assets, or "dependencies" that a particular file needs.
+npm i -D webpack webpack-cli
+Using the -D flag in our npm install command will install both packages into our devDependencies. 
+A devDependency is a dependency that is only required for local development and testing, and does not need to be installed for proper functionality.
+webpack-cli provides us with a series of commands we can use to help us more quickly set up our webpack project.
+we can move onto creating what is called a webpack.config.js, which is a blueprint for how we would like webpack to function within our project.
+We'll use a core Node.js module that we've used previously, called path.
+First, we need to create the main configuration object within our file. We'll write options within this object that tell webpack what to do. 
+For a basic configuration, we need to provide webpack with three properties: entry, output, and mode.
+The entry point is the root of the bundle and the beginning of the dependency graph, so give it the relative path to the client's code.
+output that bundled code to a folder that we specify. 
+By default, webpack wants to run in production mode. 
+ In this mode, webpack will minify our code for us automatically, along with some other nice additions.
+ when we pass --watch into our command, webpack will automatically watch for saved changes to our files.
+ When we talk about the build, we are talking about webpack's process of bundling our code and outputting a new bundled, 
+ production-ready file.
+ This error occurs because when we ran our build, webpack bundled our code and created a dependency graph.
+ When one file needs another file to function properly, the necessary file is called a dependency. 
+ Shpuld always install npm i jquery
+ This is because if we want webpack to now use the jQuery package, we need to use a plugin to let webpack know. 
+ we'll add the plugins to the webpack.config.js file. 
+ Above the mode property, add plugins as an array, shown in the following code:
+ Inside the empty array, we need to tell webpack which plugin we want to use
+ e're going to use the providePlugin plugin to define the $ and jQuery variables to use the installed npm package.
+ Whenever you work with libraries that are dependent on the use of a global variable, just like jQuery is with $ and jQuery,
+  you must tell webpack to make exceptions for these variables by using webpack.ProvidePlugin. 
+The carousel, modals, and anything else that uses Bootstrap will require that code to be included. 
+Right now, the only script we've included in our project is the dist/main.bundle.js. 
+o let's install Bootstrap to restore functionality to the page. 
