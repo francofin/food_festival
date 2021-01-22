@@ -3,3 +3,33 @@ including HTML, CSS and JavaScript, so that the user won't have to re-download i
 
 This caching gives our application offline functionality.
 Progressive Web Application. This will allow the app to be installed on a mobile device or desktop computer for quick, offline access. 
+PWA, which is short for Progressive Web Application, describes a web app that resembles a native mobile app, and which maintains its reliability,
+Promis.all sets up more than one promises but only processes once all the calls resolves
+
+self.clients.claim tells service worker to reload all the cahced files as we have removed all the previous versions
+manifest.json tells the browser we can download the app
+A web manifest is the blueprint of a PWA. 
+It's a JSON file that will contain the metadata such as a title, a description, 
+and an icon that tells the user's device what it is installing and how it should look on the home screen.
+Web manifests can be created manually or automatically with the help of a webpack plugin.
+The first three properties that a manifest.json should have are 
+the name, short_name, and description, shown in the following example:
+{
+  "name": "Food Event",
+  "short_name": "Foodies",
+  "description": "An app that allows you to view upcoming food events."
+}
+The name property is the name that will show up next to the app's icon on desktop devices.  
+The short_name is the name that will appear on a user's home screen when the application has been downloaded.
+Next, we would need to set the background_color and theme_color properties, as shown in the following code:
+The theme_color sets the color of the tool bar. This color may also show up if the user is switching tasks, either on mobile or or a desktop device.
+The last important property to add to a manifest.json is the icons property.
+When we create a PWA, we need to provide multiple sized icons, as shown in the following code:
+For the webpack-pwa-manifest plugin to work, we need to provide these properties in our webpack.config.js.
+First though, we need to bring the plugin into our JSON file. 
+When we use the new keyword, we are invoking a constructor function. 
+In the list of options, we included a start_url property to specify the homepage for the PWA relative to the location of the manifest file.
+Fingerprints tell webpack whether or not it should generate unique fingerprints so that each time a new manifest is generated, 
+The inject property determines whether the link to the manifest.json is added to the HTML. 
+That object contains a src property, which is a path to the icon image we want to use. 
+Finally, the destination property designates where the icons will be sent after the creation of the web manifest is completed by the plugin. 

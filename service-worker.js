@@ -12,7 +12,8 @@ const FILES_TO_CACHE = [
     "./dist/schedule.bundle.js"
   ];
 
-const APP_PREFIX = 'FoodFest-';     
+const APP_PREFIX = 'FoodFest-';  
+//DATA_CACHE_NAME   
 const VERSION = 'version_01';
 const CACHE_NAME = APP_PREFIX + VERSION;
 

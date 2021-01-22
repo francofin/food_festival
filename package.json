@@ -22,10 +22,11 @@
   "homepage": "https://github.com/francofin/food_festival#readme",
   "devDependencies": {
     "file-loader": "^6.2.0",
-    "webpack": "^5.16.0",
+    "webpack": "^4.43.0",
     "webpack-bundle-analyzer": "^4.3.0",
     "webpack-cli": "^3.3.8",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-pwa-manifest": "^4.3.0"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
